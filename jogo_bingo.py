@@ -320,19 +320,11 @@ cartela10.append(int(67));
 cartela10.append(int(65));
 cartela10.append(int(68));
 
-numeros_chamados = list()
-#percorre os números de 1 a 90 na variável chama_numeros
-chama_numeros = range(1, 90)
-#mostra os números aleatórios não repetidos saida de 90 números sorteados
-# adc valores não repetitivo na variável numeros_chamados usando a função sample()
-numeros_chamados = sample(chama_numeros, 89)
-#cria uma variável lista chamada numeros_sorteados
-numeros_sorteados = []
-
 #variável que vai percorrer e contar  a lista do resultado do jogo
 contador = int(0)
-#contador para contar qual cartela deu bingo
+#contador para contar qual cartela deu bingo(ganhou)
 contador_bingo = 0
+#variável lista para guardar o resultado dos numeros chamados do jogo
 resultado_jogo = []
 print('Atenção, o jogo vai começar!!');
 #rodar 300 vezes até que uma cartela seje preenchida
