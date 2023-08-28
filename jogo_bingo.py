@@ -6,14 +6,14 @@ Inicio projeto: 20/08/2023
 '''
 #canto das importações de bibliotecas da linguagem python
 #importando a biblioteca de tempo
-from time import sleep;
+from time import sleep
 #importando a biblioteca de esolha aleatoria de um número do tipo inteiro.
-from random import randint;
+from random import sample, randint
 
 
 
 #cria uma lista de ítens para ser inserido
-cartela1 = list();
+cartela1 = [];
 #atribui valores na variável lista criada. append(acrescentar).
 cartela1.append(int(12));
 cartela1.append(int(3));
@@ -320,29 +320,63 @@ cartela10.append(int(67));
 cartela10.append(int(65));
 cartela10.append(int(68));
 
+numeros_chamados = list()
+#percorre os números de 1 a 90 na variável chama_numeros
+chama_numeros = range(1, 90)
+#mostra os números aleatórios não repetidos saida de 90 números sorteados
+# adc valores não repetitivo na variável numeros_chamados usando a função sample()
+numeros_chamados = sample(chama_numeros, 89)
+#cria uma variável lista chamada numeros_sorteados
+numeros_sorteados = []
 
-
-for i in range(90):
-
-
-    print('Atenção se prepare para os números');
-    sleep(15);
-    #A máquina escolhe um número aleatório.
-    numero_sorteado = randint(1, 90);
-    #mostra na tela o número sorteado
-    print('Número: {}'.format(numero_sorteado));
-    #cira uma variável de tipo lista para acrescentar os números sorteados
-    lista_num_sorteados = list();
-    #Acrescenta os valores dos números sorteados na varilavel lista_num_sorteados.
-    lista_num_sorteados.append(int(numero_sorteado));
-
-
-
-
-
+#variável que vai percorrer e contar  a lista do resultado do jogo
+contador = int(0)
+#contador para contar qual cartela deu bingo
+contador_bingo = 0
+resultado_jogo = []
+print('Atenção, o jogo vai começar!!');
+#rodar 300 vezes até que uma cartela seje preenchida
+for i in range(300):
+    #vai escolher um número aleatório de 1 a 90 do tipo inteiro int random (aleatório)
+    bolas_sorteadas = randint(1, 90)
+    sleep(5)
+    #vai chamar números sem repetir
+    #se os valores da variável bolas_sorteadas não estiver na variavel reultado_jogo, vai adc esses valores
+    #o comando append é para acrescentar valor no caso bolas_sorteadas
+    if bolas_sorteadas not in resultado_jogo:
+        resultado_jogo.append(int(bolas_sorteadas))
+        print('Bola N°: {}'.format(resultado_jogo));
+        print('Jogador cartela: {}'.format(cartela1));
+        #se o resultado estiver dentro da cartela1 ele entra na condição
+        if resultado_jogo[contador] in cartela1:
+            print('Saiu a bola n°: {}'.format(resultado_jogo[contador]));
+            #incrementa 1
+            contador_bingo +=1;
+            print('contador', contador_bingo);
+            #se completar a cartela deu bingo
+            if contador_bingo == 25:
+                print('Bingooo!! cartela n°: 1!!!');
+                #break para o laço
+                break;
+        contador +=1;
 
 print('\n');
 print(62*'~');
 print('              JOGO DO BINGO EM DESENVOLVIMENTO!!');
 print(62*'~');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
