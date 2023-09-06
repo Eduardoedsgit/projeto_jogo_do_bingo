@@ -1,374 +1,149 @@
-'''
-Projeto Jogo do Bingo
-Autor: Eduardo Machado de Souza
-Inicio projeto: 20/08/2023
+#Criando o jogo do bingo em Python
+#Autor: Eduardo Machado
+#Data de iniciado: 05/09/2023
+#Portfólio: edudigitalsystems.blogspot.com
+#E-mail: edudigitalsystems@gmail.com
 
-'''
-#canto das importações de bibliotecas da linguagem python
-#importando a biblioteca de tempo
+
+#importanto todas as bibliotecas usadas no jogo
+#random é para gerar números aleatorios e randint() é o método para gerar números
+# inteiros aleatórios
+from random import randint
+#O cycle(ciclo) gera um looping for infinito, é da biblioteca itertools(ferramentas iterativas).
+from itertools import cycle
+#importando a biblioteca time para usar o comando sleep que conta tempo para uma mensagem passar sleep(adormecer)
 from time import sleep
-#importando a biblioteca de esolha aleatoria de um número do tipo inteiro.
-from random import sample, randint
+
+#variáveis do tipo lista sendo criada
+#Obs: o jogo só vai ler as catelas se estiverem com números inteiros positivo
+#aqui a lista das variáveis das cartelas não serão lidas por terem números que
+#não existem nas cartelas, que são negativos. os números aleatórios só saem positivos.
+cartela1, cartela2, cartela3, cartela4, cartela5 = [-1], [-1], [-1], [-1], [-1]
+cartela6, cartela7, cartela8, cartela9, cartela10 = [-1], [-1], [-1], [-1], [-1]
 
 
+#variável que vai pegar a quantidade de cartelas que vai entrar no jogo.
+quantidade_cartelas = int(input('Quantidade total de cartelas: '))
 
-#cria uma lista de ítens para ser inserido
-cartela1 = [];
-#atribui valores na variável lista criada. append(acrescentar).
-cartela1.append(int(12));
-cartela1.append(int(3));
-cartela1.append(int(1));
-cartela1.append(int(5));
-cartela1.append(int(6));
-cartela1.append(int(29));
-cartela1.append(int(20));
-cartela1.append(int(17));
-cartela1.append(int(28));
-cartela1.append(int(25));
-cartela1.append(int(40));
-cartela1.append(int(42));
-cartela1.append(int(36));
-cartela1.append(int(31));
-cartela1.append(int(38));
-cartela1.append(int(60));
-cartela1.append(int(57));
-cartela1.append(int(58));
-cartela1.append(int(49));
-cartela1.append(int(56));
-cartela1.append(int(75));
-cartela1.append(int(72));
-cartela1.append(int(68));
-cartela1.append(int(69));
-cartela1.append(int(65));
-
-#Cartela 2------------------------------
-#Criando a lista de cartela2 variável lista
-cartela2 = list();
-#adc valores na variável lista criada chamada cartela2
-cartela2.append(int(15));
-cartela2.append(int(8));
-cartela2.append(int(2));
-cartela2.append(int(5));
-cartela2.append(int(9));
-cartela2.append(int(16));
-cartela2.append(int(27));
-cartela2.append(int(23));
-cartela2.append(int(30));
-cartela2.append(int(19));
-cartela2.append(int(35));
-cartela2.append(int(39));
-cartela2.append(int(33));
-cartela2.append(int(41));
-cartela2.append(int(40));
-cartela2.append(int(59));
-cartela2.append(int(51));
-cartela2.append(int(53));
-cartela2.append(int(48));
-cartela2.append(int(47));
-cartela2.append(int(67));
-cartela2.append(int(68));
-cartela2.append(int(74));
-cartela2.append(int(66));
-cartela2.append(int(64));
-
-
-#cartela número 3-----------------
-#criando a variavels lista cartela3
-cartela3 = list();
-#adc dados na variavellista3 do tipo inteiro (int).
-cartela3.append(int(3));
-cartela3.append(int(14));
-cartela3.append(int(9));
-cartela3.append(int(11));
-cartela3.append(int(8));
-cartela3.append(int(29));
-cartela3.append(int(28));
-cartela3.append(int(30));
-cartela3.append(int(18));
-cartela3.append(int(27));
-cartela3.append(int(41));
-cartela3.append(int(35));
-cartela3.append(int(31));
-cartela3.append(int(42));
-cartela3.append(int(45));
-cartela3.append(int(56));
-cartela3.append(int(49));
-cartela3.append(int(47));
-cartela3.append(int(57));
-cartela3.append(int(53));
-cartela3.append(int(75));
-cartela3.append(int(67));
-cartela3.append(int(69));
-cartela3.append(int(70));
-cartela3.append(int(62));
-
-#Cartela número 4------------------
-#criando a variável lista cartela4
-cartela4 = list();
-#Acrescentando dados na variável lista chamada cartela4
-cartela4.append(int(8));
-cartela4.append(int(15));
-cartela4.append(int(4));
-cartela4.append(int(10));
-cartela4.append(int(7));
-cartela4.append(int(27));
-cartela4.append(int(16));
-cartela4.append(int(26));
-cartela4.append(int(30));
-cartela4.append(int(19));
-cartela4.append(int(41));
-cartela4.append(int(38));
-cartela4.append(int(33));
-cartela4.append(int(43));
-cartela4.append(int(35));
-cartela4.append(int(53));
-cartela4.append(int(46));
-cartela4.append(int(47));
-cartela4.append(int(48));
-cartela4.append(int(60));
-cartela4.append(int(65));
-cartela4.append(int(62));
-cartela4.append(int(64));
-cartela4.append(int(71));
-cartela4.append(int(66));
-
-
-#Cartela número 5 ----------------------
-#Criando a variável lista cartela 5
-cartela5 = list();
-#Acrescentando dados di tipo intieor na variável cartela5
-cartela5.append(int(12));
-cartela5.append(int(14));
-cartela5.append(int(7));
-cartela5.append(int(8));
-cartela5.append(int(2));
-cartela5.append(int(19));
-cartela5.append(int(22));
-cartela5.append(int(24));
-cartela5.append(int(16));
-cartela5.append(int(23));
-cartela5.append(int(40));
-cartela5.append(int(42));
-cartela5.append(int(38));
-cartela5.append(int(41));
-cartela5.append(int(39));
-cartela5.append(int(50));
-cartela5.append(int(54));
-cartela5.append(int(49));
-cartela5.append(int(59));
-cartela5.append(int(57));
-cartela5.append(int(62));
-cartela5.append(int(75));
-cartela5.append(int(61));
-cartela5.append(int(63));
-cartela5.append(int(74));
-
-
-#Cartela n° 6 ----------------------------------------
-#criando avariável lista chamada cartela6.
-cartela6 = list();
-
-cartela6.append(int(13));
-cartela6.append(int(10));
-cartela6.append(int(5));
-cartela6.append(int(1));
-cartela6.append(int(15));
-cartela6.append(int(24));
-cartela6.append(int(17));
-cartela6.append(int(23));
-cartela6.append(int(29));
-cartela6.append(int(18));
-cartela6.append(int(31));
-cartela6.append(int(37));
-cartela6.append(int(42));
-cartela6.append(int(36));
-cartela6.append(int(45));
-cartela6.append(int(46));
-cartela6.append(int(51));
-cartela6.append(int(55));
-cartela6.append(int(48));
-cartela6.append(int(53));
-cartela6.append(int(73));
-cartela6.append(int(67));
-cartela6.append(int(61));
-cartela6.append(int(68));
-cartela6.append(int(63));
-
-#Certela n° 7 ---------------------------------------------
-#Criando a variável lista chamada cartela7
-cartela7 = list();
-
-#acrescentando valores na variável lista chamada cartela7
-cartela7.append(int(2));
-cartela7.append(int(14));
-cartela7.append(int(5));
-cartela7.append(int(10));
-cartela7.append(int(6));
-cartela7.append(int(26));
-cartela7.append(int(28));
-cartela7.append(int(30));
-cartela7.append(int(25));
-cartela7.append(int(22));
-cartela7.append(int(41));
-cartela7.append(int(43));
-cartela7.append(int(37));
-cartela7.append(int(34));
-cartela7.append(int(32));
-cartela7.append(int(47));
-cartela7.append(int(50));
-cartela7.append(int(55));
-cartela7.append(int(46));
-cartela7.append(int(58));
-cartela7.append(int(71));
-cartela7.append(int(68));
-cartela7.append(int(70));
-cartela7.append(int(63));
-cartela7.append(int(66));
-
-
-#Cartela de n° 8 ----------------------------------------
-
-#Criando a variável do tipo lista chamada cartela8
-cartela8 = list();
-
-#Acrescentando valores inteiros na variável lista chamada cartela8.
-cartela8.append(int(1));
-cartela8.append(int(7));
-cartela8.append(int(13));
-cartela8.append(int(2));
-cartela8.append(int(12));
-cartela8.append(int(21));
-cartela8.append(int(23));
-cartela8.append(int(17));
-cartela8.append(int(25));
-cartela8.append(int(19));
-cartela8.append(int(45));
-cartela8.append(int(38));
-cartela8.append(int(32));
-cartela8.append(int(33));
-cartela8.append(int(39));
-cartela8.append(int(54));
-cartela8.append(int(59));
-cartela8.append(int(52));
-cartela8.append(int(58));
-cartela8.append(int(46));
-cartela8.append(int(69));
-cartela8.append(int(71));
-cartela8.append(int(63));
-cartela8.append(int(64));
-cartela8.append(int(61));
-
-
-#Cartela de n° 9 ------------------------------------
-#Criando a variável do tipo lista chamdao cartela9
-cartela9 = list();
-#Acrescentando os valores do tipo inteiro na variável cartela9
-cartela9.append(int(13));
-cartela9.append(int(7));
-cartela9.append(int(3));
-cartela9.append(int(4));
-cartela9.append(int(15));
-cartela9.append(int(21));
-cartela9.append(int(30));
-cartela9.append(int(26));
-cartela9.append(int(16));
-cartela9.append(int(23));
-cartela9.append(int(35));
-cartela9.append(int(40));
-cartela9.append(int(36));
-cartela9.append(int(32));
-cartela9.append(int(41));
-cartela9.append(int(51));
-cartela9.append(int(59));
-cartela9.append(int(49));
-cartela9.append(int(46));
-cartela9.append(int(58));
-cartela9.append(int(73));
-cartela9.append(int(67));
-cartela9.append(int(68));
-cartela9.append(int(66));
-cartela9.append(int(65));
-
-
-#Cartela de n° 10 -------------------------------------
-#Criando a variável do tipo lista chamada cartela10
-cartela10 = list();
-#Acrescentando valores na variável do tipo lista chamada cartela10
-cartela10.append(int(9));
-cartela10.append(int(7));
-cartela10.append(int(4));
-cartela10.append(int(6));
-cartela10.append(int(1));
-cartela10.append(int(25));
-cartela10.append(int(21));
-cartela10.append(int(20));
-cartela10.append(int(29));
-cartela10.append(int(22));
-cartela10.append(int(45));
-cartela10.append(int(32));
-cartela10.append(int(31));
-cartela10.append(int(42));
-cartela10.append(int(38));
-cartela10.append(int(57));
-cartela10.append(int(56));
-cartela10.append(int(46));
-cartela10.append(int(49));
-cartela10.append(int(47));
-cartela10.append(int(72));
-cartela10.append(int(64));
-cartela10.append(int(67));
-cartela10.append(int(65));
-cartela10.append(int(68));
-
-#variável que vai percorrer e contar  a lista do resultado do jogo
-contador = int(0)
-#contador para contar qual cartela deu bingo(ganhou)
-contador_bingo = 0
-#variável lista para guardar o resultado dos numeros chamados do jogo
-resultado_jogo = []
-print('Atenção, o jogo vai começar!!');
-#rodar 300 vezes até que uma cartela seje preenchida
-for i in range(300):
-    #vai escolher um número aleatório de 1 a 90 do tipo inteiro int random (aleatório)
-    bolas_sorteadas = randint(1, 90)
-    sleep(5)
-    #vai chamar números sem repetir
-    #se os valores da variável bolas_sorteadas não estiver na variavel reultado_jogo, vai adc esses valores
-    #o comando append é para acrescentar valor no caso bolas_sorteadas
-    if bolas_sorteadas not in resultado_jogo:
-        resultado_jogo.append(int(bolas_sorteadas))
-        print('Bola N°: {}'.format(resultado_jogo));
-        print('Jogador cartela: {}'.format(cartela1));
-        #se o resultado estiver dentro da cartela1 ele entra na condição
-        if resultado_jogo[contador] in cartela1:
-            print('Saiu a bola n°: {}'.format(resultado_jogo[contador]));
-            #incrementa 1
-            contador_bingo +=1;
-            print('contador', contador_bingo);
-            #se completar a cartela deu bingo
-            if contador_bingo == 25:
-                print('Bingooo!! cartela n°: 1!!!');
-                #break para o laço
-                break;
-        contador +=1;
-
-print('\n');
-print(62*'~');
-print('              JOGO DO BINGO EM DESENVOLVIMENTO!!');
-print(62*'~');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#laço que vai repetir de acordo com o número de cartelas digitado pelo usuário
+#Ex:se for digitado 4, então serão 4 cartelas a serem cadastradas
+for i in range(quantidade_cartelas):
+    #variável criada para pegar os números das cartelas.
+    num_cartela = int(input('N° da cartela: '))
+    #condicção para ver qual cartela foi escolhida pelos jogadores.
+    if num_cartela == 1:
+        # colocando(populando) os números da cartela1 na variável escolhida chamada cartela1.
+        # variável do tipo lista sendo criada chamada cartela1 e recebendo os seus números
+        cartela1 = [
+            12, 3, 1, 5, 6,
+            29, 20, 17, 28, 25,
+            40, 42, 36, 31, 38,
+            60, 57, 58, 49, 56,
+            75, 72, 68, 69, 65
+        ]
+        print(cartela1)
+    # condicção para ver qual cartela foi escolhida pelos jogadores.
+    #se o número da cartela digitada for 2 então coloca os dados da cartela 2 na variável cartela2.
+    if num_cartela == 2:
+        # colocando os dados na cartela2
+        # variável do tipo lista sendo criada
+        cartela2 = [
+            15, 8, 2, 5, 9,
+            16, 27, 23, 30, 19,
+            35, 39, 33, 41, 40,
+            59, 51, 53, 48, 47,
+            67, 68, 74, 66, 64
+        ]
+        print(cartela2)
+    if num_cartela == 3:
+        cartela3 = [
+            3, 14, 9, 11, 8,
+            29, 28, 30, 18, 27,
+            41, 35, 31, 42, 45,
+            56, 49, 47, 57, 53,
+            75, 67, 69, 70, 62,
+        ]
+        print(cartela3)
+    if num_cartela == 4:
+        cartela4 = [
+            8, 15, 4, 10, 7,
+            27, 16, 26, 30, 19,
+            41, 38, 33, 43, 35,
+            53, 46, 47, 48, 60,
+            65, 62, 64, 71, 66
+        ]
+        print(cartela4)
+    if num_cartela == 5:
+        cartela5 = [
+            12, 14, 7, 8, 2,
+            19, 22, 24, 16, 23,
+            40, 42, 38, 41, 39,
+            50, 54, 49, 59, 57,
+            62, 75, 61, 63, 74,
+        ]
+        print(cartela5)
+    if num_cartela == 6:
+        cartela6 = [
+            13, 10, 5, 1, 15,
+            24, 17, 23, 29, 18,
+            31, 37, 42, 36, 45,
+            46, 51, 55, 48, 53,
+            73, 67, 61, 68, 63
+        ]
+        print(cartela6)
+    if num_cartela == 7:
+        cartela7 = [
+            2, 14, 5, 10, 6,
+            26, 28, 30, 25, 22,
+            41, 43, 37, 34, 32,
+            47, 50, 55, 46, 58,
+            71, 68, 70, 63, 66
+        ]
+        print(cartela7)
+    if num_cartela == 8:
+        cartela8 = [
+            1, 7, 13, 2, 12,
+            21, 23, 17, 25, 19,
+            45, 38, 32, 33, 39,
+            54, 59, 52, 58, 46,
+            69, 71, 63, 64, 61
+        ]
+        print(cartela8)
+    if num_cartela == 9:
+        cartela9 = [
+            13, 7, 3, 4, 15,
+            21, 30, 26, 16, 23,
+            35, 40, 36, 32, 41,
+            51, 59, 49, 46, 58,
+            73, 67, 68, 66, 65
+        ]
+        print(cartela9)
+    if num_cartela == 10:
+        cartela10 = [
+            9, 7, 4, 6, 1,
+            25, 21, 20, 29, 22,
+            45, 32, 31, 42, 38,
+            57, 56, 46, 49, 47,
+            72, 64, 67, 65, 68
+        ]
+        print(cartela10)
+#Criando a variável que vai guardar todos os resultados das bolas chamadas pelo sistema.
+resultados_chamada = []
+#Mensagem de aviso que vai começar o jogo
+print('Atenção!! o Jogo vai começar ')
+sleep(7)
+#laço de repetição para rodar infinitamente com o comando cycle(ciclo)
+for i in cycle(range(1)):
+    # variável criada para pegar a bola chamada aleatória entre 1 e 90
+    bola_chamada = randint(1, 90)
+    #Se não existir a bola chamada dentro da variável resultados_chamada ela adc
+    #isso evita de chamar bolas repetidas.
+    if bola_chamada not in resultados_chamada:
+        # Vai falar as bolas chamadas e mostrar na tela
+        print('Bola n°: {}'.format(bola_chamada))
+        # comando sleep(adormecer) para demorar 7 segundos após o anúncio da bola.
+        sleep(7)
+        #o comando append(acrescentar) acrescenta o valor de bola_chamada, acumula todos os valores chamados.
+        resultados_chamada.append(bola_chamada)
+        #imprime todos os resultados das bolas que foram chamadas no jogo
+        print('Chamadas: {}'.format(resultados_chamada))
