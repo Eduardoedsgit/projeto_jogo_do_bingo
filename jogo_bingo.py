@@ -1,4 +1,5 @@
 #Criando o jogo do bingo em Python
+#Linguagem Python versão (version) 3.11.5
 #Autor: Eduardo Machado
 #Data de iniciado: 05/09/2023
 #Portfólio: edudigitalsystems.blogspot.com
