@@ -133,7 +133,7 @@ resultados_chamada = []
 #Mensagem de aviso que vai começar o jogo
 print('Atenção!! o Jogo vai começar ')
 sleep(7)
-#laço de repetição para rodar infinitamente com o comando cycle(ciclo)
+#laço de repetição para rodar infinitamente com o comando cycle(ciclo) da biblioteca itertools(ferramentas iterativas)
 for i in cycle(range(1)):
     # variável criada para pegar a bola chamada aleatória entre 1 e 90
     bola_chamada = randint(1, 90)
@@ -141,10 +141,10 @@ for i in cycle(range(1)):
     #isso evita de chamar bolas repetidas.
     if bola_chamada not in resultados_chamada:
         # Vai falar as bolas chamadas e mostrar na tela
-        print('Bola n°: {}'.format(bola_chamada))
+        print(f'Bola n°: {bola_chamada}')
         # comando sleep(adormecer) para demorar 7 segundos após o anúncio da bola.
         sleep(7)
         #o comando append(acrescentar) acrescenta o valor de bola_chamada, acumula todos os valores chamados.
         resultados_chamada.append(bola_chamada)
         #imprime todos os resultados das bolas que foram chamadas no jogo
-        print('Chamadas: {}'.format(resultados_chamada))
+        print(f'Chamadas: {resultados_chamada}')
