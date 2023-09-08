@@ -14,6 +14,8 @@ from random import randint
 from itertools import cycle
 #importando a biblioteca time para usar o comando sleep que conta tempo para uma mensagem passar sleep(adormecer)
 from time import sleep
+#importando a biblioteca pygame para usar o método mixer para executar sons do jogo
+from pygame import mixer
 
 #variáveis do tipo lista sendo criada
 #Obs: o jogo só vai ler as catelas se estiverem com números inteiros positivo
@@ -128,23 +130,242 @@ for i in range(quantidade_cartelas):
             72, 64, 67, 65, 68
         ]
         print(cartela10)
-#Criando a variável que vai guardar todos os resultados das bolas chamadas pelo sistema.
+#Criando as variáveis que vai guardar todos os resultados das bolas chamadas pelo sistema.
 resultados_chamada = []
+#Essa variável foi criada para ser carregada quando a resultados_chamada sobrecarregar.
+resultados_chamada2 = []
+#caso a variavel_chamada sobrecarregar
+resultados_chamada3 = []
+#caso a variavel_chamada sobrecarregar
+resultados_chamada4 = []
+#caso a variavel_chamada sobrecarregar
+resultados_chamada5 = []
+#Pega os dados, caso a variavel resultados_chamada sobrecarregar
+resultados_chamada6 = []
+
+#variáveis que vai contar os resultados das cartelas que forem prennchidas
+completa_cartela1 = 0
+completa_cartela2 = 0
+completa_cartela3 = 0
+completa_cartela4 = 0
+completa_cartela5 = 0
+completa_cartela6 = 0
+completa_cartela7 = 0
+completa_cartela8 = 0
+completa_cartela9 = 0
+completa_cartela10 = 0
+
+#lista de sons da chamada das bolas do bingo
+chamadas_voz = {
+                1: 'Audio-bingo\\bola_n1.wav',
+                2: 'Audio-bingo\\bola_n2.wav',
+                3: 'Audio-bingo\\bola_n3.wav',
+                4: 'Audio-bingo\\bola_n4.wav',
+                5: 'Audio-bingo\\bola_n5.wav',
+                6: 'Audio-bingo\\bola_n6.wav',
+                7: 'Audio-bingo\\bola_n7.wav',
+                8: 'Audio-bingo\\bola_n8.wav',
+                9: 'Audio-bingo\\bola_n9.wav',
+                10: 'Audio-bingo\\bola_n10.wav',
+                11: 'Audio-bingo\\bola_n11.wav',
+                12: 'Audio-bingo\\bola_n12.wav',
+                13: 'Audio-bingo\\bola_n13.wav',
+                14: 'Audio-bingo\\bola_n14.wav',
+                15: 'Audio-bingo\\bola_n15.wav',
+                16: 'Audio-bingo\\bola_n16.wav',
+                17: 'Audio-bingo\\bola_n17.wav',
+                18: 'Audio-bingo\\bola_n18.wav',
+                19: 'Audio-bingo\\bola_n19.wav',
+                20: 'Audio-bingo\\bola_n20.wav',
+                21: 'Audio-bingo\\bola_n21.wav',
+                22: 'Audio-bingo\\bola_n22.wav',
+                23: 'Audio-bingo\\bola_n23.wav',
+                24: 'Audio-bingo\\bola_n24.wav',
+                25: 'Audio-bingo\\bola_n25.wav',
+                26: 'Audio-bingo\\bola_n26.wav',
+                27: 'Audio-bingo\\bola_n27.wav',
+                28: 'Audio-bingo\\bola_n28.wav',
+                29: 'Audio-bingo\\bola_n29.wav',
+                30: 'Audio-bingo\\bola_n30.wav',
+                31: 'Audio-bingo\\bola_n31.wav',
+                32: 'Audio-bingo\\bola_n32.wav',
+                33: 'Audio-bingo\\bola_n33.wav',
+                34: 'Audio-bingo\\bola_n34.wav',
+                35: 'Audio-bingo\\bola_n35.wav',
+                36: 'Audio-bingo\\bola_n36.wav',
+                37: 'Audio-bingo\\bola_n37.wav',
+                38: 'Audio-bingo\\bola_n38.wav',
+                39: 'Audio-bingo\\bola_n39.wav',
+                40: 'Audio-bingo\\bola_n40.wav',
+                41: 'Audio-bingo\\bola_n41.wav',
+                42: 'Audio-bingo\\bola_n42.wav',
+                43: 'Audio-bingo\\bola_n43.wav',
+                44: 'Audio-bingo\\bola_n44.wav',
+                45: 'Audio-bingo\\bola_n45.wav',
+                46: 'Audio-bingo\\bola_n46.wav',
+                47: 'Audio-bingo\\bola_n47.wav',
+                48: 'Audio-bingo\\bola_n48.wav',
+                49: 'Audio-bingo\\bola_n49.wav',
+                50: 'Audio-bingo\\bola_n50.wav',
+                51: 'Audio-bingo\\bola_n51.wav',
+                52: 'Audio-bingo\\bola_n52.wav',
+                53: 'Audio-bingo\\bola_n53.wav',
+                54: 'Audio-bingo\\bola_n54.wav',
+                55: 'Audio-bingo\\bola_n55.wav',
+                56: 'Audio-bingo\\bola_n56.wav',
+                57: 'Audio-bingo\\bola_n57.wav',
+                58: 'Audio-bingo\\bola_n58.wav',
+                59: 'Audio-bingo\\bola_n59.wav',
+                60: 'Audio-bingo\\bola_n60.wav',
+                61: 'Audio-bingo\\bola_n61.wav',
+                62: 'Audio-bingo\\bola_n62.wav',
+                63: 'Audio-bingo\\bola_n63.wav',
+                64: 'Audio-bingo\\bola_n64.wav',
+                65: 'Audio-bingo\\bola_n65.wav',
+                66: 'Audio-bingo\\bola_n66.wav',
+                67: 'Audio-bingo\\bola_n67.wav',
+                68: 'Audio-bingo\\bola_n68.wav',
+                69: 'Audio-bingo\\bola_n69.wav',
+                70: 'Audio-bingo\\bola_n70.wav',
+                71: 'Audio-bingo\\bola_n71.wav',
+                72: 'Audio-bingo\\bola_n72.wav',
+                73: 'Audio-bingo\\bola_n73.wav',
+                74: 'Audio-bingo\\bola_n74.wav',
+                75: 'Audio-bingo\\bola_n75.wav',
+                76: 'Audio-bingo\\bola_n76.wav',
+                77: 'Audio-bingo\\bola_n77.wav',
+                78: 'Audio-bingo\\bola_n78.wav',
+                79: 'Audio-bingo\\bola_n79.wav',
+                80: 'Audio-bingo\\bola_n80.wav',
+                81: 'Audio-bingo\\bola_n81.wav',
+                82: 'Audio-bingo\\bola_n82.wav',
+                83: 'Audio-bingo\\bola_n83.wav',
+                84: 'Audio-bingo\\bola_n84.wav',
+                85: 'Audio-bingo\\bola_n85.wav',
+                86: 'Audio-bingo\\bola_n86.wav',
+                87: 'Audio-bingo\\bola_n87.wav',
+                88: 'Audio-bingo\\bola_n88.wav',
+                89: 'Audio-bingo\\bola_n89.wav',
+                90: 'Audio-bingo\\bola_n90.wav',
+                }
+
 #Mensagem de aviso que vai começar o jogo
 print('Atenção!! o Jogo vai começar ')
 sleep(7)
 #laço de repetição para rodar infinitamente com o comando cycle(ciclo) da biblioteca itertools(ferramentas iterativas)
 for i in cycle(range(1)):
-    # variável criada para pegar a bola chamada aleatória entre 1 e 90
+    # variável criada para pegar a bola da chamada aleatória entre 1 e 90
     bola_chamada = randint(1, 90)
-    #Se não existir a bola chamada dentro da variável resultados_chamada ela adc
+    #Se não existir a bola chamada dentro da variável resultados_chamada, ela adc
     #isso evita de chamar bolas repetidas.
     if bola_chamada not in resultados_chamada:
         # Vai falar as bolas chamadas e mostrar na tela
         print(f'Bola n°: {bola_chamada}')
+        #iniciando a biblioteca pygame com o método init()
+        mixer.init()
+        #Lendo o diretório da música com o comando .load()
+        #Vai ler o número da chave de acordo com o número da bola_chamada ex se for 1 será número 1
+        mixer.music.load(chamadas_voz[bola_chamada])
+        #Dando play para a som começar
+        mixer.music.play()
         # comando sleep(adormecer) para demorar 7 segundos após o anúncio da bola.
         sleep(7)
         #o comando append(acrescentar) acrescenta o valor de bola_chamada, acumula todos os valores chamados.
         resultados_chamada.append(bola_chamada)
         #imprime todos os resultados das bolas que foram chamadas no jogo
         print(f'Chamadas: {resultados_chamada}')
+        #Condição para não deixar a variável sobrecarregada de informações, caso chegar em 20 limpa-se a variável
+        if len(resultados_chamada) == 20:
+            #O método .copy() faz uma cópia dos dados inseridos,
+            #No caso está copiando os dados da variável resultados_chamada e jogando na rerultados_chamada2.
+            resultados_chamada2 = resultados_chamada.copy()
+            # O método clear() limpa todos os valores inseridos na variável
+            resultados_chamada.clear()
+            #Limpa a variável, caso ela guarde 40 carcterers para não sobrecarregar.
+            #Obrs: o comando len() mostra o tamanho de carccteres dentro da variável resultados_chamada.
+            if len(resultados_chamada) == 40:
+                #faz uma cópia dos dados de resultados_chamada
+                resultados_chamada3 = resultados_chamada.copy()
+                #limpa a variável resultados_cahamda para não ficar sobrecarregada.
+                resultados_chamada.clear()
+            if len(resultados_chamada) == 60:
+                #Copia os dados da variável resultados_chamada com o comando .copy()
+                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
+                resultados_chamada4 = resultados_chamada.copy()
+                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
+                #Isso evita que a variável sobrecarregue.
+                resultados_chamada.clear()
+            if len(resultados_chamada) == 80:
+                #Copia os dados da variável resultados_chamada com o comando .copy()
+                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
+                resultados_chamada5 = resultados_chamada.copy()
+                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
+                #Isso evita que a variável sobrecarregue.
+                resultados_chamada.clear()
+            if len(resultados_chamada) == 90:
+                #Copia os dados da variável resultados_chamada com o comando .copy()
+                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
+                resultados_chamada6 = resultados_chamada.copy()
+                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
+                #Isso evita que a variável sobrecarregue.
+                resultados_chamada.clear()
+    #Verificação da primeira cartela
+    #Condição para verificar qual cartela dará bingo!!
+    #Qual cartela será a campeã!!, Começando com a verificação da primeira cartela
+    if bola_chamada in cartela1:
+        completa_cartela1 += 1
+        #print(f'Cartela prenchida: {bola_chamada}')
+        #print(f'Contador: {completa_cartela1}')
+        #verifica se a primeira cartela for toda preenchida, será bingo!.
+        if completa_cartela1 == 25:
+            print('Bingoooo! cartela n° 1')
+            #Para o laço infinito com o comando break
+            break
+    #Se a bola_chamada estiver dentro da cartela dois, o contador completa_cartela2 incrementa 1
+    if bola_chamada in cartela2:
+        #incrementa 1 na variável completa_cartela2
+        completa_cartela2 += 1
+        #Se completa_cartela2 == 25, cartela prenchida será bingoo!!
+        if completa_cartela2 == 25:
+            print('Bingooooo!! Cartela N°: 2')
+            break
+    if bola_chamada in cartela3:
+        completa_cartela3 += 1
+        if completa_cartela3 == 25:
+            print('Bingooo!! Cartela N°: 3')
+            break
+    if bola_chamada in cartela4:
+        completa_cartela4 += 1
+        if completa_cartela4 == 25:
+            print('Bingoooo!! Cartela N°: 5')
+            break
+    if bola_chamada in cartela5:
+        completa_cartela5 += 1
+        if completa_cartela5 == 25:
+            print('Bingoooo!! Cartela N°: 5')
+            break
+    if bola_chamada in cartela6:
+        completa_cartela6 += 1
+        if completa_cartela6 == 25:
+            print('Bingooo!! Cartela N°: 6')
+            break
+    if bola_chamada in cartela7:
+        completa_cartela7 += 1
+        if completa_cartela7 == 25:
+            print('Bingooo!! Cartela N° 7')
+            break
+    if bola_chamada in cartela8:
+        completa_cartela8 += 1
+        if completa_cartela8 == 25:
+            print('Bingooo!! Cartela N° 7')
+            break
+    if bola_chamada in cartela9:
+        completa_cartela9 += 1
+        if completa_cartela9 == 25:
+            print('Bingooo!! Cartela N° 7')
+            break
+    if bola_chamada in cartela10:
+        completa_cartela10 += 1
+        if completa_cartela10 == 25:
+            print('Bingooo!! Cartela N° 7')
+            break
