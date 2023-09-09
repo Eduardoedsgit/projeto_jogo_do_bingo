@@ -132,18 +132,9 @@ for i in range(quantidade_cartelas):
         print(cartela10)
 #Criando as variáveis que vai guardar todos os resultados das bolas chamadas pelo sistema.
 resultados_chamada = []
-#Essa variável foi criada para ser carregada quando a resultados_chamada sobrecarregar.
-resultados_chamada2 = []
-#caso a variavel_chamada sobrecarregar
-resultados_chamada3 = []
-#caso a variavel_chamada sobrecarregar
-resultados_chamada4 = []
-#caso a variavel_chamada sobrecarregar
-resultados_chamada5 = []
-#Pega os dados, caso a variavel resultados_chamada sobrecarregar
-resultados_chamada6 = []
 
-#variáveis que vai contar os resultados das cartelas que forem prennchidas
+#variáveis que vai guardar os resultados das pontuações de cada uma das cartelas que forem prennchidas
+#cada variável guarda as pontuações de uma cartela específica.
 completa_cartela1 = 0
 completa_cartela2 = 0
 completa_cartela3 = 0
@@ -251,7 +242,7 @@ chamadas_voz = {
 
 #Mensagem de aviso que vai começar o jogo
 print('Atenção!! o Jogo vai começar ')
-sleep(7)
+sleep(15)
 #laço de repetição para rodar infinitamente com o comando cycle(ciclo) da biblioteca itertools(ferramentas iterativas)
 for i in cycle(range(1)):
     # variável criada para pegar a bola da chamada aleatória entre 1 e 90
@@ -261,6 +252,9 @@ for i in cycle(range(1)):
     if bola_chamada not in resultados_chamada:
         # Vai falar as bolas chamadas e mostrar na tela
         print(f'Bola n°: {bola_chamada}')
+        #variável que vai pegar os resultados das bolas não repetidas
+        no_repet_bola_chamada = bola_chamada
+        #cria uma variável que vai pegar as chamadas das bolas não repetidas.
         #iniciando a biblioteca pygame com o método init()
         mixer.init()
         #Lendo o diretório da música com o comando .load()
@@ -269,103 +263,66 @@ for i in cycle(range(1)):
         #Dando play para a som começar
         mixer.music.play()
         # comando sleep(adormecer) para demorar 7 segundos após o anúncio da bola.
-        sleep(7)
+        sleep(10)
         #o comando append(acrescentar) acrescenta o valor de bola_chamada, acumula todos os valores chamados.
         resultados_chamada.append(bola_chamada)
         #imprime todos os resultados das bolas que foram chamadas no jogo
         print(f'Chamadas: {resultados_chamada}')
-        #Condição para não deixar a variável sobrecarregada de informações, caso chegar em 20 limpa-se a variável
-        if len(resultados_chamada) == 20:
-            #O método .copy() faz uma cópia dos dados inseridos,
-            #No caso está copiando os dados da variável resultados_chamada e jogando na rerultados_chamada2.
-            resultados_chamada2 = resultados_chamada.copy()
-            # O método clear() limpa todos os valores inseridos na variável
-            resultados_chamada.clear()
-            #Limpa a variável, caso ela guarde 40 carcterers para não sobrecarregar.
-            #Obrs: o comando len() mostra o tamanho de carccteres dentro da variável resultados_chamada.
-            if len(resultados_chamada) == 40:
-                #faz uma cópia dos dados de resultados_chamada
-                resultados_chamada3 = resultados_chamada.copy()
-                #limpa a variável resultados_cahamda para não ficar sobrecarregada.
-                resultados_chamada.clear()
-            if len(resultados_chamada) == 60:
-                #Copia os dados da variável resultados_chamada com o comando .copy()
-                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
-                resultados_chamada4 = resultados_chamada.copy()
-                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
-                #Isso evita que a variável sobrecarregue.
-                resultados_chamada.clear()
-            if len(resultados_chamada) == 80:
-                #Copia os dados da variável resultados_chamada com o comando .copy()
-                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
-                resultados_chamada5 = resultados_chamada.copy()
-                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
-                #Isso evita que a variável sobrecarregue.
-                resultados_chamada.clear()
-            if len(resultados_chamada) == 90:
-                #Copia os dados da variável resultados_chamada com o comando .copy()
-                #E insere os valores copiados na variável resultados_chamada4 com o comando de atribuição = .
-                resultados_chamada6 = resultados_chamada.copy()
-                #Limpa os dados coletados da variável resultados_chamada com o comando .clear().
-                #Isso evita que a variável sobrecarregue.
-                resultados_chamada.clear()
-    #Verificação da primeira cartela
-    #Condição para verificar qual cartela dará bingo!!
-    #Qual cartela será a campeã!!, Começando com a verificação da primeira cartela
-    if bola_chamada in cartela1:
-        completa_cartela1 += 1
-        #print(f'Cartela prenchida: {bola_chamada}')
-        #print(f'Contador: {completa_cartela1}')
-        #verifica se a primeira cartela for toda preenchida, será bingo!.
-        if completa_cartela1 == 25:
-            print('Bingoooo! cartela n° 1')
-            #Para o laço infinito com o comando break
-            break
-    #Se a bola_chamada estiver dentro da cartela dois, o contador completa_cartela2 incrementa 1
-    if bola_chamada in cartela2:
-        #incrementa 1 na variável completa_cartela2
-        completa_cartela2 += 1
-        #Se completa_cartela2 == 25, cartela prenchida será bingoo!!
-        if completa_cartela2 == 25:
-            print('Bingooooo!! Cartela N°: 2')
-            break
-    if bola_chamada in cartela3:
-        completa_cartela3 += 1
-        if completa_cartela3 == 25:
-            print('Bingooo!! Cartela N°: 3')
-            break
-    if bola_chamada in cartela4:
-        completa_cartela4 += 1
-        if completa_cartela4 == 25:
-            print('Bingoooo!! Cartela N°: 5')
-            break
-    if bola_chamada in cartela5:
-        completa_cartela5 += 1
-        if completa_cartela5 == 25:
-            print('Bingoooo!! Cartela N°: 5')
-            break
-    if bola_chamada in cartela6:
-        completa_cartela6 += 1
-        if completa_cartela6 == 25:
-            print('Bingooo!! Cartela N°: 6')
-            break
-    if bola_chamada in cartela7:
-        completa_cartela7 += 1
-        if completa_cartela7 == 25:
-            print('Bingooo!! Cartela N° 7')
-            break
-    if bola_chamada in cartela8:
-        completa_cartela8 += 1
-        if completa_cartela8 == 25:
-            print('Bingooo!! Cartela N° 7')
-            break
-    if bola_chamada in cartela9:
-        completa_cartela9 += 1
-        if completa_cartela9 == 25:
-            print('Bingooo!! Cartela N° 7')
-            break
-    if bola_chamada in cartela10:
-        completa_cartela10 += 1
-        if completa_cartela10 == 25:
-            print('Bingooo!! Cartela N° 7')
-            break
+        #Verificação da primeira cartela
+        #Condição para verificar qual cartela dará bingo!!
+        #Qual cartela será a campeã!!, Começando com a verificação da primeira cartela
+        if no_repet_bola_chamada in cartela1:
+            completa_cartela1 += 1
+            #verifica se a primeira cartela for toda preenchida, será bingo!.
+            if completa_cartela1 == 25:
+                print('Bingoooo! cartela n° 1')
+                #Para o laço infinito com o comando break
+                break
+        #Se a bola_chamada estiver dentro da cartela dois, o contador completa_cartela2 incrementa 1
+        if no_repet_bola_chamada in cartela2:
+            #incrementa 1 na variável completa_cartela2
+            completa_cartela2 += 1
+            #Se completa_cartela2 == 25, cartela prenchida será bingoo!!
+            if completa_cartela2 == 25:
+                print('Bingooooo!! Cartela N°: 2')
+                break
+        if no_repet_bola_chamada in cartela3:
+            completa_cartela3 += 1
+            if completa_cartela3 == 25:
+                print('Bingooo!! Cartela N°: 3')
+                break
+        if no_repet_bola_chamada in cartela4:
+            completa_cartela4 += 1
+            if completa_cartela4 == 25:
+                print('Bingoooo!! Cartela N°: 4')
+                break
+        if no_repet_bola_chamada in cartela5:
+            completa_cartela5 += 1
+            if completa_cartela5 == 25:
+                print('Bingoooo!! Cartela N°: 5')
+                break
+        if no_repet_bola_chamada in cartela6:
+            completa_cartela6 += 1
+            if completa_cartela6 == 25:
+                print('Bingooo!! Cartela N°: 6')
+                break
+        if no_repet_bola_chamada in cartela7:
+            completa_cartela7 += 1
+            if completa_cartela7 == 25:
+                print('Bingooo!! Cartela N° 7')
+                break
+        if no_repet_bola_chamada in cartela8:
+            completa_cartela8 += 1
+            if completa_cartela8 == 25:
+                print('Bingooo!! Cartela N° 8')
+                break
+        if no_repet_bola_chamada in cartela9:
+            completa_cartela9 += 1
+            if completa_cartela9 == 25:
+                print('Bingooo!! Cartela N° 9')
+                break
+        if no_repet_bola_chamada in cartela10:
+            completa_cartela10 += 1
+            if completa_cartela10 == 25:
+                print('Bingooo!! Cartela N° 10')
+                break
